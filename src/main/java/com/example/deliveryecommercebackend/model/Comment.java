@@ -1,7 +1,6 @@
 package com.example.deliveryecommercebackend.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,18 +17,25 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 
-@Table(name="product_type")
-public class ProductType {
+@Table(name="comment")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String name;
-    private String des;
+    @Column(name = "content")
+    private String content;
     @CreatedDate
     private Date created;
     @LastModifiedDate
     private Date updated;
-    @JsonIgnore
-    private boolean state;
 
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    @JsonBackReference
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name="news_id")
+    @JsonBackReference
+    private News news;
 }

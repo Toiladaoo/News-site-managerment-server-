@@ -2,17 +2,10 @@ package com.example.deliveryecommercebackend.controller;
 
 
 import com.example.deliveryecommercebackend.DTO.UserDTO;
-import com.example.deliveryecommercebackend.services.AuthenticationServices;
-import com.example.deliveryecommercebackend.services.UserService;
-import com.fasterxml.jackson.annotation.JsonView;
-import jakarta.persistence.PostUpdate;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.swing.text.View;
 
 @RestController
 @RequestMapping("/api/user")

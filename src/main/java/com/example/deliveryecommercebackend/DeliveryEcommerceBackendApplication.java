@@ -1,7 +1,6 @@
 package com.example.deliveryecommercebackend;
 
 import com.example.deliveryecommercebackend.repository.ActionRepository;
-import com.example.deliveryecommercebackend.repository.BankRepository;
 import com.example.deliveryecommercebackend.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

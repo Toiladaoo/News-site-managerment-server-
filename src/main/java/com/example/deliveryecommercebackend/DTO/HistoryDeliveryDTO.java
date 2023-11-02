@@ -1,7 +1,5 @@
 package com.example.deliveryecommercebackend.DTO;
 
-import com.example.deliveryecommercebackend.model.Branch;
-import com.example.deliveryecommercebackend.model.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

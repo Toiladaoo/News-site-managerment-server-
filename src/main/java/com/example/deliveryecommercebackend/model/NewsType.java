@@ -2,7 +2,10 @@ package com.example.deliveryecommercebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -14,8 +17,8 @@ import java.sql.Date;
 @AllArgsConstructor
 @Entity
 
-@Table(name="area")
-public class Area {
+@Table(name="news_type")
+public class NewsType {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
@@ -23,19 +26,15 @@ public class Area {
     private String code;
     @Column(name = "name")
     private String name;
+    @Column(name = "des")
+    private String des;
     @Column(updatable = false)
     @CreatedDate
     private Date created;
     @LastModifiedDate
     private Date updated;
-    @Column(name = "des")
-    private String des;
     @JsonIgnore
     private boolean is_delete;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "city_id")
-    @ToString.Exclude
-    private City city;
 
 }

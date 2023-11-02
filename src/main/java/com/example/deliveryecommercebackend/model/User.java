@@ -35,16 +35,20 @@ public class User {
     private String purpose;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "news_id")
+    @ToString.Exclude
+    private News news;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
     @ToString.Exclude
     private Role role;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Store> stores;
+    private List<Order> orders;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Order> orders;
+    private List<Order> comment;
 }
