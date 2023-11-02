@@ -1,9 +1,7 @@
 package com.example.deliveryecommercebackend.model;
 
 import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
-import com.example.deliveryecommercebackend.utils.Auditor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;

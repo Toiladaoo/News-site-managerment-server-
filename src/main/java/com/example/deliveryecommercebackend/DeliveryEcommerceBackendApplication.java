@@ -1,7 +1,10 @@
 package com.example.deliveryecommercebackend;
 
+import com.example.deliveryecommercebackend.model.Role;
+import com.example.deliveryecommercebackend.model.User;
 import com.example.deliveryecommercebackend.repository.ActionRepository;
 import com.example.deliveryecommercebackend.repository.RoleRepository;
+import com.example.deliveryecommercebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,30 +19,25 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private ActionRepository actionRepository;
+    private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
 
     @Override
     public void run(String... args) throws Exception {
-//        Bank newBank = new Bank();
-//        newBank.setBank_id("bank1");
-//        newBank.setName("EXIMBANK");
-//        newBank.setState(false);
-//        bankRepository.save(newBank);
+//        Role role = new Role();
+//        role.setRoleId(1);
+//        role.setName("admin");
+//        role.setDes("admin");
+//        roleRepository.save(role);
 //
-//        Bank newBank1 = new Bank();
-//        newBank1.setBank_id("bank2");
-//        newBank1.setName("TPBANK");
-//        newBank1.setState(false);
-//        bankRepository.save(newBank1);
-//
-//
-//        Bank newBank2 = new Bank();
-//        newBank2.setBank_id("bank3");
-//        newBank2.setName("TECHCOMBANK");
-//        newBank2.setState(false);
-//        bankRepository.save(newBank2);
+//        User user = new User();
+//        user.setUser_id("1");
+//        user.setFullName("user default");
+//        user.setEmail("userdefault@gmail.com");
+//        user.setRole(role);
+//        user.setPassword("123456");
+//        userRepository.save(user);
 //
 //        Role roleAdmin = new Role();
 //        roleAdmin.setRoleId(1);

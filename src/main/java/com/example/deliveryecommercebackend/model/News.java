@@ -1,10 +1,8 @@
 package com.example.deliveryecommercebackend.model;
 
 import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
-import com.example.deliveryecommercebackend.utils.Auditor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

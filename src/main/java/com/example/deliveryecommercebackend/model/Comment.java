@@ -1,8 +1,6 @@
 package com.example.deliveryecommercebackend.model;
 
 import com.example.deliveryecommercebackend.DTO.CommentDTO;
-import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
-import com.example.deliveryecommercebackend.utils.Auditor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -51,11 +49,8 @@ public class Comment {
         this.setUser(user);
         this.setNews(news);
     }
-    public void setDataUpdated(CommentDTO commentDTO, News news, User user){
-        this.setComment_id(commentDTO.getId());
+    public void setDataUpdated(CommentDTO commentDTO){
         this.setContent(commentDTO.getContent());
         this.setUpdated(java.sql.Date.valueOf(LocalDate.now()));
-        this.setUser(user);
-        this.setNews(news);
     }
 }

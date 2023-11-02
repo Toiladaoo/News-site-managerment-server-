@@ -34,10 +34,9 @@ public class User {
     private String phone;
     private String purpose;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "news_id")
-    @ToString.Exclude
-    private News news;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<News> news;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
