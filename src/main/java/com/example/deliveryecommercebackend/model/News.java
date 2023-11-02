@@ -34,12 +34,10 @@ public class News {
     private String sub_content;
     @Column(name = "image")
     private String image;
-    @Column(name = "type")
-    private String type;
     @Column(name = "news_status")
     private String news_status;
     @Column(name = "comment_status")
-    private String comment_status;
+    private boolean comment_status;
     @Column(updatable = false)
     @CreatedDate
     private Date created;
@@ -50,12 +48,12 @@ public class News {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonBackReference
+//    @JsonBackReference
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="newsType_id")
-    @JsonBackReference
+    @JoinColumn(name="news_type_id")
+//    @JsonBackReference
     private NewsType newsType;
 
 //    @OneToMany(mappedBy = "comment_id", cascade = CascadeType.ALL)
@@ -66,11 +64,12 @@ public class News {
         this.setId(news.getId());
         this.setTitle(news.getTitle());
         this.setContent(news.getContent());
+        this.setSub_content(news.getSub_content());
         this.setImage(news.getImage());
         this.setCreated(java.sql.Date.valueOf(LocalDate.now()));
         this.setUpdated(java.sql.Date.valueOf(LocalDate.now()));
-        this.setNews_status(news.getNews_status());
-        this.setComment_status(news.getComment_status());
+        this.setNews_status("new");
+        this.setComment_status(true);
 
         this.setNewsType(newsType);
         this.setUser(user);
@@ -82,6 +81,5 @@ public class News {
         this.setImage(news.getImage());
         this.setUpdated(java.sql.Date.valueOf(LocalDate.now()));
         this.setNews_status(news.getNews_status());
-        this.setComment_status(news.getComment_status());
     }
 }

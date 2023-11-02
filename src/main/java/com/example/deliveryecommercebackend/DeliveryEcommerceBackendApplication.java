@@ -34,6 +34,7 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
 //        User user = new User();
 //        user.setUser_id("1");
 //        user.setFullName("user default");
+//        user.setAccount("userdefault");
 //        user.setEmail("userdefault@gmail.com");
 //        user.setRole(role);
 //        user.setPassword("123456");

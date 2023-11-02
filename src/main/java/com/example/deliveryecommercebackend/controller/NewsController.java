@@ -2,6 +2,7 @@ package com.example.deliveryecommercebackend.controller;
 
 
 import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.services.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,7 +54,7 @@ public class NewsController {
     @PostMapping
     public ResponseEntity<?> createNews(@RequestBody NewsCreateDTO news) {
         try {
-            HttpStatus checkAdd = newsService.createNews(news);
+            HttpStatus checkAdd = newsService.insertNews(news);
             if(checkAdd == HttpStatus.OK) {
                 return ResponseEntity.ok("Insert success");
             } else {
@@ -61,7 +62,7 @@ public class NewsController {
             }
         } catch (Exception ex) {
             System.out.println("Error from server, Error:" + ex);
-            return ResponseEntity.badRequest().body("Error from news");
+            return ResponseEntity.badRequest().body("Error from newsType");
         }
     }
 

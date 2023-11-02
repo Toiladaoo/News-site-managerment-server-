@@ -1,7 +1,9 @@
 package com.example.deliveryecommercebackend.services;
 
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.DTO.UserDTO;
 import com.example.deliveryecommercebackend.DTO.getUserListDTO;
+import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.Role;
 import com.example.deliveryecommercebackend.model.User;
 import com.example.deliveryecommercebackend.repository.RoleRepository;
@@ -71,6 +73,43 @@ public class UserService {
         if(checkValidAccount != null) {
             return HttpStatus.FOUND;
         }
+        User newUser = new User();
+        newUser.setCreated(Date.valueOf(LocalDate.now()));
+        newUser.setUpdated(Date.valueOf(LocalDate.now()));
+        newUser.setAccount(user.getAccount());
+        newUser.setEmail(user.getEmail());
+        newUser.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+        newUser.setPhone(user.getPhone());
+        newUser.setDes(user.getDes());
+        newUser.setFullName(user.getFullName());
+        newUser.setPurpose(user.getPurpose());
+        newUser.setRole(role);
+
+        try {
+            User checkSave = userRepository.save(newUser);
+            if(checkSave != null) {
+                return HttpStatus.OK;
+            }
+        } catch(Exception ex) {
+            System.out.printf("Create user failed - Error" + ex);
+        }
+        return HttpStatus.NOT_ACCEPTABLE;
+    }
+
+    public HttpStatus insertUser(UserDTO user) {
+        Role role = roleRepository.findById(user.getRole()).get();
+        if(role == null) {
+            role = roleRepository.findRoleByName(user.getFullName());
+        }
+        var checkValidAccount = userRepository.findUserByAccount(user.getAccount());
+        var checkValidEmail = userRepository.findUsersByEmail(user.getEmail());
+        if(checkValidEmail != null) {
+            return HttpStatus.FOUND;
+        }
+        if(checkValidAccount != null) {
+            return HttpStatus.FOUND;
+        }
+
         User newUser = new User();
         newUser.setCreated(Date.valueOf(LocalDate.now()));
         newUser.setUpdated(Date.valueOf(LocalDate.now()));

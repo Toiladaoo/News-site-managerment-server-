@@ -21,14 +21,14 @@ public class NewsCreateDTO {
     private String sub_content;
     private String content;
     private String image;
-    private String newsType_id;
+    private String news_type_id;
     private String user_id;
     @CreatedDate
     private Date created;
     @LastModifiedDate
     private Date updated;
     private String news_status;
-    private String comment_status;
+    private boolean comment_status;
 
     public NewsCreateDTO(News news) {
         this.id = news.getId();
@@ -39,10 +39,10 @@ public class NewsCreateDTO {
         this.created = news.getCreated();
         this.updated = news.getUpdated();
         this.news_status = news.getNews_status();
-        this.comment_status = news.getComment_status();
+        this.comment_status = true;
 
         this.user_id = news.getUser().getUser_id();
-        this.newsType_id = news.getNewsType().getNewsType_id();
+        this.news_type_id = news.getNewsType().getNewsType_id();
     }
 
     public void setData(News news){
@@ -54,9 +54,8 @@ public class NewsCreateDTO {
         this.setCreated(news.getCreated());
         this.setUpdated(news.getUpdated());
         this.setNews_status(news.getNews_status());
-        this.setComment_status(news.getComment_status());
 
         this.setUser_id(news.getUser().getUser_id());
-        this.setNewsType_id(news.getNewsType().getNewsType_id());
+        this.setNews_type_id(news.getNewsType().getNewsType_id());
     }
 }

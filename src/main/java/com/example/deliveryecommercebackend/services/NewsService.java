@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.services;
 
 import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.DTO.UserDTO;
 import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.News;
@@ -55,13 +56,17 @@ public class NewsService {
         }
     }
 
-    public HttpStatus createNews(NewsCreateDTO news) {
-        NewsType newsType = newsTypeRepository.findNewsTypeById(news.getNewsType_id());
+    public HttpStatus insertNews(NewsCreateDTO news) {
+        System.out.println(news.getNews_type_id());
+        NewsType newsType = newsTypeRepository.findById(news.getNews_type_id()).get();
+        System.out.println(newsType);
         if(newsType == null) {
             return HttpStatus.BAD_REQUEST;
         }
 
+
         User user = userRepository.findNoneDeleteUserById(news.getUser_id());
+        System.out.println(user);
         if(user == null) {
             return HttpStatus.BAD_REQUEST;
         }

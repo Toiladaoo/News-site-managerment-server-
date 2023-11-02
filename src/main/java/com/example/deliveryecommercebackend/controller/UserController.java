@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.controller;
 
 
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.DTO.UserDTO;
 import com.example.deliveryecommercebackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,16 +54,15 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody UserDTO user) {
         try {
-            HttpStatus checkAdd = userService.createUser(user);
-            System.out.println(user.getRoleName());
+            HttpStatus checkAdd = userService.insertUser(user);
             if(checkAdd == HttpStatus.OK) {
                 return ResponseEntity.ok("Insert success");
             } else {
-                return ResponseEntity.status(checkAdd).body("Insert user failed");
+                return ResponseEntity.status(checkAdd).body("Insert newsType failed");
             }
         } catch (Exception ex) {
             System.out.println("Error from server, Error:" + ex);
-            return ResponseEntity.badRequest().body("Error from user");
+            return ResponseEntity.badRequest().body("Error from newsType");
         }
     }
 
