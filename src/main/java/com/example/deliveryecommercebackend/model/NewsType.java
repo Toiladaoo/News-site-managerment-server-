@@ -1,15 +1,14 @@
 package com.example.deliveryecommercebackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,8 +25,6 @@ public class NewsType {
     private String code;
     @Column(name = "name")
     private String name;
-    @Column(name = "parent_id")
-    private String parent_id;
     @Column(name = "des")
     private String des;
     @Column(updatable = false)
@@ -38,5 +35,8 @@ public class NewsType {
     @JsonIgnore
     private boolean is_delete;
 
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "parent_id")
+    @ToString.Exclude
+    private NewsType parentType;
 }
