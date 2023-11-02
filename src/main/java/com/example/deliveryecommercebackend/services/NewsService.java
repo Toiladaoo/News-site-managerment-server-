@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.services;
 
 import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
+import com.example.deliveryecommercebackend.DTO.NewsDisplayDTO;
 import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.DTO.UserDTO;
 import com.example.deliveryecommercebackend.model.Action;
@@ -15,7 +16,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,12 +34,12 @@ public class NewsService {
     @Autowired
     private ActionRepository actionRepository;
 
-    public List<NewsCreateDTO> getAllNewss() {
+    public List<NewsDisplayDTO> getAllNewss() {
         try {
             var staffList = newsRepository.findNoneDeleteNews();
-            List<NewsCreateDTO> res = new ArrayList<NewsCreateDTO>();
+            List<NewsDisplayDTO> res = new ArrayList<NewsDisplayDTO>();
             for(News news : staffList){
-                NewsCreateDTO temp = new NewsCreateDTO();
+                NewsDisplayDTO temp = new NewsDisplayDTO();
                 temp.setData(news);
                 res.add(temp);
             }
