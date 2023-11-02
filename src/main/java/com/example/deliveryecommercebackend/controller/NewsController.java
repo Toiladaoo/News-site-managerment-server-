@@ -35,6 +35,20 @@ public class NewsController {
         }
 
     }
+    @GetMapping("/action/{actionCode}")
+    public ResponseEntity<?>getNewsByAction(@PathVariable String actionCode) {
+        try {
+            var listNews = newsService.getNewssByActionCode(actionCode);
+            if (listNews.isEmpty()) {
+                return ResponseEntity.ok().body("Empty list news.");
+            } else {
+                return ResponseEntity.ok().body(listNews);
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body("Error from server");
+        }
+
+    }
 
     @GetMapping("{news_id}")
     public ResponseEntity<?>getNewsById(@PathVariable String news_id) {

@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.controller;
 
 import com.example.deliveryecommercebackend.DTO.ActionDTO;
+import com.example.deliveryecommercebackend.DTO.ActionDisplayDTO;
 import com.example.deliveryecommercebackend.model.Action;
 import com.example.deliveryecommercebackend.repository.ActionRepository;
 import com.example.deliveryecommercebackend.services.ActionService;
@@ -20,7 +21,7 @@ public class ActionController {
     private ActionService actionService;
 
     @GetMapping
-    public List<Action> getActionList(){
+    public List<ActionDisplayDTO> getActionList(){
         return actionService.getAllActions();
     }
     @PostMapping

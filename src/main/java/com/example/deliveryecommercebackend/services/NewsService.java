@@ -36,9 +36,31 @@ public class NewsService {
 
     public List<NewsDisplayDTO> getAllNewss() {
         try {
-            var staffList = newsRepository.findNoneDeleteNews();
+            var newsList = newsRepository.findNoneDeleteNews();
             List<NewsDisplayDTO> res = new ArrayList<NewsDisplayDTO>();
-            for(News news : staffList){
+            for(News news : newsList){
+                NewsDisplayDTO temp = new NewsDisplayDTO();
+                temp.setData(news);
+                res.add(temp);
+            }
+
+            return res;
+        } catch(Exception ex) {
+            System.out.printf("Get news failed - Error: " + ex);
+            return Collections.emptyList();
+        }
+    }
+    public List<NewsDisplayDTO> getNewssByActionCode(String actionCode) {
+        Action action = actionRepository.findByCode(actionCode);
+
+        if(action == null) {
+            return Collections.emptyList();
+        }
+
+        try {
+            List<News> newsList = newsRepository.findNoneDeleteNewsByAction(action);
+            List<NewsDisplayDTO> res = new ArrayList<NewsDisplayDTO>();
+            for(News news : newsList){
                 NewsDisplayDTO temp = new NewsDisplayDTO();
                 temp.setData(news);
                 res.add(temp);

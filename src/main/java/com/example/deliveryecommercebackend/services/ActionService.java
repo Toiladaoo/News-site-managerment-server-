@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.services;
 
 import com.example.deliveryecommercebackend.DTO.ActionDTO;
+import com.example.deliveryecommercebackend.DTO.ActionDisplayDTO;
 import com.example.deliveryecommercebackend.exception.ResourceNotfoundException;
 import com.example.deliveryecommercebackend.model.Action;
 import com.example.deliveryecommercebackend.repository.ActionRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -23,10 +25,16 @@ public class ActionService {
         this.actionRepository = actionRepository;
     }
 
-    public List<Action> getAllActions() {
+    public List<ActionDisplayDTO> getAllActions() {
         try {
             List<Action> actions = actionRepository.findAll();
-            return actions;
+            List<ActionDisplayDTO> actionsOutput = new ArrayList<>();
+            for(Action item : actions){
+                ActionDisplayDTO temp = new ActionDisplayDTO(item);
+                actionsOutput.add(temp);
+            }
+
+            return actionsOutput;
         } catch(Exception ex) {
             System.out.printf("Get user failed - Error: " + ex);
             return Collections.emptyList();
