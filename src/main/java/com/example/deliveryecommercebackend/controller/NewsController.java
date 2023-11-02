@@ -79,6 +79,19 @@ public class NewsController {
         }
     }
 
+    @PutMapping("{newsId}/action/{actionCode}")
+    public ResponseEntity<?> setActionNews(@PathVariable String newsId, @PathVariable String actionCode) {
+        try {
+            HttpStatus check = newsService.setAction(newsId, actionCode);
+            if(check != HttpStatus.OK)
+                return ResponseEntity.status(check).body("Update data failed");
+            return ResponseEntity.status(check).body("Update data successfully");
+        } catch (Exception ex) {
+            System.out.printf("Error from controller" + ex);
+            return ResponseEntity.badRequest().body("Error fom server" + ex);
+        }
+    }
+
     @PutMapping("{id}")
     public ResponseEntity<?> deleteNews(@PathVariable String id) {
         try {

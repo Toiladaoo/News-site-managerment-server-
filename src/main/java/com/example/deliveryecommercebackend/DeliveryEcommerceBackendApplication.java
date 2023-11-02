@@ -1,5 +1,6 @@
 package com.example.deliveryecommercebackend;
 
+import com.example.deliveryecommercebackend.model.Action;
 import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.Role;
 import com.example.deliveryecommercebackend.model.User;
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 @SpringBootApplication
 
@@ -26,6 +30,8 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
     private RoleRepository roleRepository;
     @Autowired
     private NewsTypeRepository newsTypeRepository;
+    @Autowired
+    private ActionRepository actionRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -77,6 +83,7 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
 //
 //        Action action = new Action();
 //        action.setAction_id(0);
+//        action.setCode("0");
 //        action.setName("waiting");
 //        action.setDes("waiting for accepting");
 //        action.setType("admin");
@@ -87,6 +94,7 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
 //
 //        Action action1 = new Action();
 //        action1.setAction_id(1);
+//        action.setCode("1");
 //        action1.setName("accept");
 //        action1.setDes("accepted");
 //        action1.setType("admin");
@@ -97,6 +105,7 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
 //
 //        Action action2 = new Action();
 //        action2.setAction_id(2);
+//        action.setCode("2");
 //        action2.setName("decline");
 //        action2.setDes("decline");
 //        action2.setType("admin");

@@ -15,6 +15,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,20 +64,24 @@ public class NewsService {
     public HttpStatus insertNews(NewsCreateDTO news) {
         System.out.println(news.getNews_type_code());
         NewsType newsType = newsTypeRepository.findByCode(news.getNews_type_code());
-        System.out.println(newsType);
         if(newsType == null) {
             return HttpStatus.BAD_REQUEST;
         }
 
 
         User user = userRepository.findNoneDeleteUserById(news.getUser_id());
-        System.out.println(user);
         if(user == null) {
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        Action action = actionRepository.findById(0).get();
+        if(action == null) {
             return HttpStatus.BAD_REQUEST;
         }
 
         News newNews = new News();
         newNews.setDataCreate(news, newsType, user);
+        newNews.setAction(action);
 
         try {
             News checkSave = newsRepository.save(newNews);
@@ -90,14 +95,18 @@ public class NewsService {
         }
     }
 
-    public HttpStatus setAction(NewsCreateDTO newsDTO) {
-        Action action = actionRepository.findByCode(newsDTO.getNews_status());
+    public HttpStatus setAction(String newsId, String actionCode) {
+        Action action = actionRepository.findByCode(actionCode);
         if(action == null) {
             return HttpStatus.BAD_REQUEST;
         }
 
-        News news = newsRepository.findNewsById(newsDTO.getId());
-        news.setNews_status(action.getName());
+        News news = newsRepository.findById(newsId).get();
+        if(news == null) {
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        news.setAction(action);
 
         try {
             var checkSave = newsRepository.save(news);

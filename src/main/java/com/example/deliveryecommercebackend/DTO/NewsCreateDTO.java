@@ -15,7 +15,6 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class NewsCreateDTO {
-
     private String id;
     private String title;
     private String sub_content;
@@ -29,7 +28,7 @@ public class NewsCreateDTO {
     private Date created;
     @LastModifiedDate
     private Date updated;
-    private String news_status;
+    private String action_code;
     private boolean comment_status;
 
     public NewsCreateDTO(News news) {
@@ -40,8 +39,8 @@ public class NewsCreateDTO {
         this.image = news.getImage();
         this.created = news.getCreated();
         this.updated = news.getUpdated();
-        this.news_status = news.getNews_status();
         this.comment_status = true;
+        this.action_code = news.getAction().getCode();
 
         this.user_id = news.getUser().getUser_id();
         this.news_type_code = news.getNewsType().getCode();
@@ -56,10 +55,10 @@ public class NewsCreateDTO {
         this.setImage(news.getImage());
         this.setCreated(news.getCreated());
         this.setUpdated(news.getUpdated());
-        this.setNews_status(news.getNews_status());
+        this.setAction_code(news.getAction().getCode());
 
         this.setUser_id(news.getUser().getUser_id());
-        this.setNews_type_code(news.getNewsType().getNewsType_id());
+        this.setNews_type_code(news.getNewsType().getCode());
         this.setNews_type_name(news.getNewsType().getName());
     }
 }
