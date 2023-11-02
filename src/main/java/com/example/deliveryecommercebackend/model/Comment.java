@@ -1,5 +1,6 @@
 package com.example.deliveryecommercebackend.model;
 
+import com.example.deliveryecommercebackend.utils.Auditor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Getter
 @Setter

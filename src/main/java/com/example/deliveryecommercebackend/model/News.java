@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.model;
 
 import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
+import com.example.deliveryecommercebackend.utils.Auditor;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -12,7 +13,8 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -30,6 +32,8 @@ public class News {
     private String title;
     @Column(name = "content")
     private String content;
+    @Column(name = "sub_content")
+    private String sub_content;
     @Column(name = "image")
     private String image;
     @Column(name = "type")
@@ -60,13 +64,13 @@ public class News {
 //    @JsonManagedReference
 //    private List<Comment> comments;
 
-    public void setData(NewsCreateDTO news, NewsType newsType, User user){
+    public void setDataCreate(NewsCreateDTO news, NewsType newsType, User user){
         this.setId(news.getId());
         this.setTitle(news.getTitle());
         this.setContent(news.getContent());
         this.setImage(news.getImage());
-        this.setCreated(news.getCreated());
-        this.setUpdated(news.getUpdated());
+        this.setCreated(java.sql.Date.valueOf(LocalDate.now()));
+        this.setUpdated(java.sql.Date.valueOf(LocalDate.now()));
         this.setNews_status(news.getNews_status());
         this.setComment_status(news.getComment_status());
 
@@ -78,8 +82,7 @@ public class News {
         this.setTitle(news.getTitle());
         this.setContent(news.getContent());
         this.setImage(news.getImage());
-        this.setCreated(news.getCreated());
-        this.setUpdated(news.getUpdated());
+        this.setUpdated(java.sql.Date.valueOf(LocalDate.now()));
         this.setNews_status(news.getNews_status());
         this.setComment_status(news.getComment_status());
     }

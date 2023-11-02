@@ -29,8 +29,8 @@ public class OrderService {
         order.setShip_cost(orderDto.getShip_cost());
         order.setReceiver(orderDto.getReceiver());
         order.setProduct_type(orderDto.getProduct_type());
-        order.setCreated(LocalDateTime.now());
-        order.setUpdated(LocalDateTime.now());
+//        order.setCreated(LocalDateTime.now());
+//        order.setUpdated(LocalDateTime.now());
         order.setAddress(orderDto.getAddress());
         order.setCollect_money(orderDto.isCollect_money());
         order.setCost(orderDto.getCost());

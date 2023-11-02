@@ -56,18 +56,18 @@ public class NewsService {
     }
 
     public HttpStatus createNews(NewsCreateDTO news) {
-        NewsType newsType = newsTypeRepository.findById(news.getNewsType_id()).get();
+        NewsType newsType = newsTypeRepository.findNewsTypeById(news.getNewsType_id());
         if(newsType == null) {
             return HttpStatus.BAD_REQUEST;
         }
 
-        User user = userRepository.findById(news.getUser_id()).get();
+        User user = userRepository.findNoneDeleteUserById(news.getUser_id());
         if(user == null) {
             return HttpStatus.BAD_REQUEST;
         }
 
         News newNews = new News();
-        newNews.setData(news, newsType, user);
+        newNews.setDataCreate(news, newsType, user);
 
         try {
             News checkSave = newsRepository.save(newNews);

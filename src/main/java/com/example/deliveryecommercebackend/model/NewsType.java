@@ -1,6 +1,7 @@
 package com.example.deliveryecommercebackend.model;
 
 import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
+import com.example.deliveryecommercebackend.utils.Auditor;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -9,6 +10,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -18,7 +20,7 @@ import java.util.List;
 @Entity
 
 @Table(name="news_type")
-public class NewsType {
+public class NewsType  {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String newsType_id;
@@ -45,11 +47,14 @@ public class NewsType {
         this.setCode(news.getCode());
         this.setName(news.getName());
         this.setDes(news.getDes());
+        this.setCreated(Date.valueOf(LocalDate.now()));
+        this.setUpdated(Date.valueOf(LocalDate.now()));
         this.set_delete(false);
     }
     public void setDataUpdate(NewsTypeDTO news){
         this.setName(news.getName());
         this.setDes(news.getDes());
+        this.setUpdated(Date.valueOf(LocalDate.now()));
         this.set_delete(false);
     }
 }

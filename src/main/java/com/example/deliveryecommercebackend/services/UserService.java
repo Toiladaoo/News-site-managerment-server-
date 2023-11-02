@@ -50,7 +50,7 @@ public class UserService {
 
     public UserDTO getUserById(String id) {
         try {
-            User user = userRepository.findUserById(id);
+            User user = userRepository.findNoneDeleteUserById(id);
             return new UserDTO(user);
         } catch(Exception ex) {
             System.out.printf("Get user failed - Error: " + ex);
@@ -113,7 +113,7 @@ public class UserService {
     }
 
     public HttpStatus deleteUser(String account) {
-        User user = userRepository.findUserById(account);
+        User user = userRepository.findNoneDeleteUserById(account);
         user.set_delete(true);
         try {
             var checkUpdate = userRepository.save(user);

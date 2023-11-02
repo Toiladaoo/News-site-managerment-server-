@@ -6,8 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -30,7 +34,6 @@ public class NewsTypeDTO {
         this.created = news.getCreated();
         this.updated = news.getUpdated();
     }
-
     public void setData(NewsType news){
         this.setId(news.getNewsType_id());
         this.setCode(news.getCode());

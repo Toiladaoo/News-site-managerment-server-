@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.id.GUIDGenerator;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Getter

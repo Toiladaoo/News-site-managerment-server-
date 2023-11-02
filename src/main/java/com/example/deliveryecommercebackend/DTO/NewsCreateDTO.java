@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -16,11 +18,14 @@ public class NewsCreateDTO {
 
     private String id;
     private String title;
+    private String sub_content;
     private String content;
     private String image;
     private String newsType_id;
     private String user_id;
+    @CreatedDate
     private Date created;
+    @LastModifiedDate
     private Date updated;
     private String news_status;
     private String comment_status;
@@ -28,6 +33,7 @@ public class NewsCreateDTO {
     public NewsCreateDTO(News news) {
         this.id = news.getId();
         this.title = news.getTitle();
+        this.sub_content = news.getSub_content();
         this.content = news.getContent();
         this.image = news.getImage();
         this.created = news.getCreated();
@@ -42,6 +48,7 @@ public class NewsCreateDTO {
     public void setData(News news){
         this.setId(news.getId());
         this.setTitle(news.getTitle());
+        this.setSub_content(news.getSub_content());
         this.setContent(news.getContent());
         this.setImage(news.getImage());
         this.setCreated(news.getCreated());
