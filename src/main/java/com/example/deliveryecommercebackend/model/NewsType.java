@@ -1,5 +1,6 @@
 package com.example.deliveryecommercebackend.model;
 
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -20,7 +21,7 @@ import java.util.List;
 public class NewsType {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String newsType_id;
     @Column(name = "code", unique = true, nullable = false)
     private String code;
     @Column(name = "name")
@@ -39,4 +40,16 @@ public class NewsType {
     @JoinColumn(name = "parent_id")
     @ToString.Exclude
     private NewsType parentType;
+
+    public void setDataCreate(NewsTypeDTO news){
+        this.setCode(news.getCode());
+        this.setName(news.getName());
+        this.setDes(news.getDes());
+        this.set_delete(false);
+    }
+    public void setDataUpdate(NewsTypeDTO news){
+        this.setName(news.getName());
+        this.setDes(news.getDes());
+        this.set_delete(false);
+    }
 }

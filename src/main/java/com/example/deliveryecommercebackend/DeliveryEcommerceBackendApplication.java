@@ -16,8 +16,6 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
     }
 
     @Autowired
-    private BankRepository bankRepository;
-    @Autowired
     private ActionRepository actionRepository;
     @Autowired
     private RoleRepository roleRepository;

@@ -1,9 +1,9 @@
 package com.example.deliveryecommercebackend.services;
 
-import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
-import com.example.deliveryecommercebackend.DTO.UserDTO;
-import com.example.deliveryecommercebackend.model.NewsType;
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
+import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.model.News;
+import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.User;
 import com.example.deliveryecommercebackend.repository.NewsRepository;
 import com.example.deliveryecommercebackend.repository.NewsTypeRepository;
@@ -19,21 +19,17 @@ import java.util.List;
 
 @Service
 @Transactional
-public class NewsService {
+public class NewsTypeService {
 
-    @Autowired
-    private NewsRepository newsRepository;
     @Autowired
     private NewsTypeRepository newsTypeRepository;
-    @Autowired
-    private UserRepository userRepository;
 
-    public List<NewsCreateDTO> getAllNewss() {
+    public List<NewsTypeDTO> getAllNewsType() {
         try {
-            var staffList = newsRepository.findNoneDeleteNews();
-            List<NewsCreateDTO> res = new ArrayList<NewsCreateDTO>();
-            for(News news : staffList){
-                NewsCreateDTO temp = new NewsCreateDTO();
+            var staffList = newsTypeRepository.findNoneDeleteNewsType();
+            List<NewsTypeDTO> res = new ArrayList<NewsTypeDTO>();
+            for(NewsType news : staffList){
+                NewsTypeDTO temp = new NewsTypeDTO();
                 temp.setData(news);
                 res.add(temp);
             }
@@ -45,32 +41,23 @@ public class NewsService {
         }
     }
 
-    public NewsCreateDTO getNewsById(String id) {
+    public NewsTypeDTO getNewsTypeById(String id) {
         try {
-            News news = newsRepository.findNewsById(id);
-            return new NewsCreateDTO(news);
+            NewsType news = newsTypeRepository.findNewsTypeById(id);
+            return new NewsTypeDTO(news);
         } catch(Exception ex) {
             System.out.printf("Get news failed - Error: " + ex);
-            return new NewsCreateDTO();
+            return new NewsTypeDTO();
         }
     }
 
-    public HttpStatus createNews(NewsCreateDTO news) {
-        NewsType newsType = newsTypeRepository.findById(news.getNewsType_id()).get();
-        if(newsType == null) {
-            return HttpStatus.BAD_REQUEST;
-        }
+    public HttpStatus createNewsType(NewsTypeDTO newsTypeDTO) {
+        NewsType newNewsType = new NewsType();
 
-        User user = userRepository.findById(news.getUser_id()).get();
-        if(user == null) {
-            return HttpStatus.BAD_REQUEST;
-        }
-
-        News newNews = new News();
-        newNews.setData(news, newsType, user);
+        newNewsType.setDataCreate(newsTypeDTO);
 
         try {
-            News checkSave = newsRepository.save(newNews);
+            NewsType checkSave = newsTypeRepository.save(newNewsType);
             if(checkSave != null) {
                 return HttpStatus.OK;
             }
@@ -82,13 +69,11 @@ public class NewsService {
     }
 
 
-    public HttpStatus updateNews(NewsCreateDTO newsDTO) {
-        News news = newsRepository.findNewsById(newsDTO.getId());
-
-        news.setDataUpdated(newsDTO);
-
+    public HttpStatus updateNewsType(NewsTypeDTO newsDTO) {
+        NewsType news = newsTypeRepository.findNewsTypeById(newsDTO.getId());
+        news.setDataUpdate(newsDTO);
         try {
-            var checkSave = newsRepository.save(news);
+            var checkSave = newsTypeRepository.save(news);
             if (checkSave != null)
                 return HttpStatus.OK;
             return HttpStatus.BAD_REQUEST;
@@ -98,11 +83,11 @@ public class NewsService {
         }
     }
 
-    public HttpStatus deleteNews(String account) {
-        News news = newsRepository.findNewsById(account);
+    public HttpStatus deleteNewsType(String id) {
+        NewsType news = newsTypeRepository.findNewsTypeById(id);
         news.set_delete(true);
         try {
-            var checkUpdate = newsRepository.save(news);
+            NewsType checkUpdate = newsTypeRepository.save(news);
             if(checkUpdate == null) {
                 return HttpStatus.BAD_REQUEST;
             }

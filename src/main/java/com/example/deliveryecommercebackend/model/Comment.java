@@ -21,7 +21,7 @@ import java.sql.Date;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String comment_id;
     @Column(name = "content")
     private String content;
     @CreatedDate

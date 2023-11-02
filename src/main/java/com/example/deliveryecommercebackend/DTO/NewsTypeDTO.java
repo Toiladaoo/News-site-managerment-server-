@@ -16,13 +16,15 @@ import java.sql.Date;
 public class NewsTypeDTO {
 
     private String id;
+    private String code;
     private String name;
     private String des;
     private Date created;
     private Date updated;
 
     public NewsTypeDTO(NewsType news) {
-        this.id = news.getId();
+        this.id = news.getNewsType_id();
+        this.code = news.getCode();
         this.name = news.getName();
         this.des = news.getDes();
         this.created = news.getCreated();
@@ -30,7 +32,8 @@ public class NewsTypeDTO {
     }
 
     public void setData(NewsType news){
-        this.setId(news.getId());
+        this.setId(news.getNewsType_id());
+        this.setCode(news.getCode());
         this.setName(news.getName());
         this.setDes(news.getDes());
         this.setCreated(news.getCreated());

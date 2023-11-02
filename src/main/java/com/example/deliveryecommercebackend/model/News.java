@@ -1,5 +1,6 @@
 package com.example.deliveryecommercebackend.model;
 
+import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -51,11 +52,35 @@ public class News {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="type_id")
+    @JoinColumn(name="newsType_id")
     @JsonBackReference
     private NewsType newsType;
 
-    @OneToMany(mappedBy = "news", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private List<News> news;
+//    @OneToMany(mappedBy = "comment_id", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+//    private List<Comment> comments;
+
+    public void setData(NewsCreateDTO news, NewsType newsType, User user){
+        this.setId(news.getId());
+        this.setTitle(news.getTitle());
+        this.setContent(news.getContent());
+        this.setImage(news.getImage());
+        this.setCreated(news.getCreated());
+        this.setUpdated(news.getUpdated());
+        this.setNews_status(news.getNews_status());
+        this.setComment_status(news.getComment_status());
+
+        this.setNewsType(newsType);
+        this.setUser(user);
+    }
+    public void setDataUpdated(NewsCreateDTO news){
+        this.setId(news.getId());
+        this.setTitle(news.getTitle());
+        this.setContent(news.getContent());
+        this.setImage(news.getImage());
+        this.setCreated(news.getCreated());
+        this.setUpdated(news.getUpdated());
+        this.setNews_status(news.getNews_status());
+        this.setComment_status(news.getComment_status());
+    }
 }

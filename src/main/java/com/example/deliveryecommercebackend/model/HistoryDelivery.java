@@ -17,8 +17,7 @@ import java.time.LocalDateTime;
 public class HistoryDelivery {
 
     private Order order;
-    private Branch branch;
-    private String nameShipper;
+    private String user;
     private LocalDateTime data_time;
     private String input_by;
     private String state;

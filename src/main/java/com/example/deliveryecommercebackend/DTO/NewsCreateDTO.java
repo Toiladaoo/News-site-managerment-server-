@@ -12,18 +12,20 @@ import java.sql.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewsDTO {
+public class NewsCreateDTO {
 
     private String id;
     private String title;
     private String content;
     private String image;
+    private String newsType_id;
+    private String user_id;
     private Date created;
     private Date updated;
     private String news_status;
     private String comment_status;
 
-    public NewsDTO(News news) {
+    public NewsCreateDTO(News news) {
         this.id = news.getId();
         this.title = news.getTitle();
         this.content = news.getContent();
@@ -32,6 +34,9 @@ public class NewsDTO {
         this.updated = news.getUpdated();
         this.news_status = news.getNews_status();
         this.comment_status = news.getComment_status();
+
+        this.user_id = news.getUser().getUser_id();
+        this.newsType_id = news.getNewsType().getNewsType_id();
     }
 
     public void setData(News news){
@@ -43,5 +48,8 @@ public class NewsDTO {
         this.setUpdated(news.getUpdated());
         this.setNews_status(news.getNews_status());
         this.setComment_status(news.getComment_status());
+
+        this.setUser_id(news.getUser().getUser_id());
+        this.setNewsType_id(news.getNewsType().getNewsType_id());
     }
 }

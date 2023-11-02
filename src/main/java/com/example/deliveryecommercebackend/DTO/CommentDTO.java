@@ -23,7 +23,7 @@ public class CommentDTO {
     private Date updated;
 
     public CommentDTO(Comment comment) {
-        this.id = comment.getId();
+        this.id = comment.getComment_id();
         this.content = comment.getContent();
         this.user_id = comment.getContent();
         this.news_id = comment.getContent();
