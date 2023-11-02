@@ -26,6 +26,8 @@ public class NewsType {
     private String code;
     @Column(name = "name")
     private String name;
+    @Column(name = "parent_id")
+    private String parent_id;
     @Column(name = "des")
     private String des;
     @Column(updatable = false)
