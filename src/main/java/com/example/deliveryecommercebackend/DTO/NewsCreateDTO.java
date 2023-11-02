@@ -21,8 +21,10 @@ public class NewsCreateDTO {
     private String sub_content;
     private String content;
     private String image;
-    private String news_type_id;
+    private String news_type_code;
+    private String news_type_name;
     private String user_id;
+    private String user_name;
     @CreatedDate
     private Date created;
     @LastModifiedDate
@@ -42,7 +44,8 @@ public class NewsCreateDTO {
         this.comment_status = true;
 
         this.user_id = news.getUser().getUser_id();
-        this.news_type_id = news.getNewsType().getNewsType_id();
+        this.news_type_code = news.getNewsType().getCode();
+        this.news_type_name = news.getNewsType().getName();
     }
 
     public void setData(News news){
@@ -56,6 +59,7 @@ public class NewsCreateDTO {
         this.setNews_status(news.getNews_status());
 
         this.setUser_id(news.getUser().getUser_id());
-        this.setNews_type_id(news.getNewsType().getNewsType_id());
+        this.setNews_type_code(news.getNewsType().getNewsType_id());
+        this.setNews_type_name(news.getNewsType().getName());
     }
 }

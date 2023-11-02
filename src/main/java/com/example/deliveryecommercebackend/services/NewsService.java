@@ -3,9 +3,11 @@ package com.example.deliveryecommercebackend.services;
 import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
 import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
 import com.example.deliveryecommercebackend.DTO.UserDTO;
+import com.example.deliveryecommercebackend.model.Action;
 import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.News;
 import com.example.deliveryecommercebackend.model.User;
+import com.example.deliveryecommercebackend.repository.ActionRepository;
 import com.example.deliveryecommercebackend.repository.NewsRepository;
 import com.example.deliveryecommercebackend.repository.NewsTypeRepository;
 import com.example.deliveryecommercebackend.repository.UserRepository;
@@ -28,6 +30,8 @@ public class NewsService {
     private NewsTypeRepository newsTypeRepository;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ActionRepository actionRepository;
 
     public List<NewsCreateDTO> getAllNewss() {
         try {
@@ -57,8 +61,8 @@ public class NewsService {
     }
 
     public HttpStatus insertNews(NewsCreateDTO news) {
-        System.out.println(news.getNews_type_id());
-        NewsType newsType = newsTypeRepository.findById(news.getNews_type_id()).get();
+        System.out.println(news.getNews_type_code());
+        NewsType newsType = newsTypeRepository.findByCode(news.getNews_type_code());
         System.out.println(newsType);
         if(newsType == null) {
             return HttpStatus.BAD_REQUEST;
@@ -82,6 +86,26 @@ public class NewsService {
             return HttpStatus.BAD_REQUEST;
         } catch(Exception ex) {
             System.out.printf("Create news failed - Error" + ex);
+            return HttpStatus.BAD_GATEWAY;
+        }
+    }
+
+    public HttpStatus setAction(NewsCreateDTO newsDTO) {
+        Action action = actionRepository.findByCode(newsDTO.getNews_status());
+        if(action == null) {
+            return HttpStatus.BAD_REQUEST;
+        }
+
+        News news = newsRepository.findNewsById(newsDTO.getId());
+        news.setNews_status(action.getName());
+
+        try {
+            var checkSave = newsRepository.save(news);
+            if (checkSave != null)
+                return HttpStatus.OK;
+            return HttpStatus.BAD_REQUEST;
+        }catch (Exception ex) {
+            System.out.printf("Error from service" + ex);
             return HttpStatus.BAD_GATEWAY;
         }
     }

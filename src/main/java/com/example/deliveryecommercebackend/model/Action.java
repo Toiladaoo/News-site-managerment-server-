@@ -20,6 +20,9 @@ public class Action {
     @Column(name = "action_id")
     private int action_id;
 
+    @Column(name = "code")
+    private String code;
+
     @Column(name = "name")
     private String name;
 

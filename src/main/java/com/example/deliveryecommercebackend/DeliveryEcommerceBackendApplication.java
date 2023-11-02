@@ -1,8 +1,10 @@
 package com.example.deliveryecommercebackend;
 
+import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.Role;
 import com.example.deliveryecommercebackend.model.User;
 import com.example.deliveryecommercebackend.repository.ActionRepository;
+import com.example.deliveryecommercebackend.repository.NewsTypeRepository;
 import com.example.deliveryecommercebackend.repository.RoleRepository;
 import com.example.deliveryecommercebackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private NewsTypeRepository newsTypeRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -39,6 +43,12 @@ public class DeliveryEcommerceBackendApplication implements CommandLineRunner {
 //        user.setRole(role);
 //        user.setPassword("123456");
 //        userRepository.save(user);
+//
+//        NewsType newstype = new NewsType();
+//        newstype.setCode("type1");
+//        newstype.setName("type 1 nhe");
+//        newstype.setDes("type1");
+//        newsTypeRepository.save(newstype);
 //
 //        Role roleAdmin = new Role();
 //        roleAdmin.setRoleId(1);
