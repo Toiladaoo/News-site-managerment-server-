@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+
 @RestController
 @RequestMapping("/api/news")
 public class NewsController {
@@ -26,28 +28,41 @@ public class NewsController {
         try {
             var listNews = newsService.getAllNewss();
             if (listNews.isEmpty()) {
-                return ResponseEntity.ok().body("Empty list news.");
+                return ResponseEntity.ok().body(Collections.emptyList());
             } else {
                 return ResponseEntity.ok().body(listNews);
             }
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error from server");
         }
-
     }
+
+    @GetMapping("/types")
+    public ResponseEntity<?>getAllNewsType() {
+        try {
+            var listNews = newsService.getNewsTypeList();
+            if (listNews.isEmpty()) {
+                return ResponseEntity.ok().body(Collections.emptyList());
+            } else {
+                return ResponseEntity.ok().body(listNews);
+            }
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().body("Error from server");
+        }
+    }
+
     @GetMapping("/action/{actionCode}")
     public ResponseEntity<?>getNewsByAction(@PathVariable String actionCode) {
         try {
             var listNews = newsService.getNewssByActionCode(actionCode);
             if (listNews.isEmpty()) {
-                return ResponseEntity.ok().body("Empty list news.");
+                return ResponseEntity.ok().body(Collections.emptyList());
             } else {
                 return ResponseEntity.ok().body(listNews);
             }
         } catch (Exception ex) {
             return ResponseEntity.badRequest().body("Error from server");
         }
-
     }
 
     @GetMapping("{news_id}")

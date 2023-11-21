@@ -1,9 +1,6 @@
 package com.example.deliveryecommercebackend.services;
 
-import com.example.deliveryecommercebackend.DTO.NewsCreateDTO;
-import com.example.deliveryecommercebackend.DTO.NewsDisplayDTO;
-import com.example.deliveryecommercebackend.DTO.NewsTypeDTO;
-import com.example.deliveryecommercebackend.DTO.UserDTO;
+import com.example.deliveryecommercebackend.DTO.*;
 import com.example.deliveryecommercebackend.model.Action;
 import com.example.deliveryecommercebackend.model.NewsType;
 import com.example.deliveryecommercebackend.model.News;
@@ -40,6 +37,22 @@ public class NewsService {
             List<NewsDisplayDTO> res = new ArrayList<NewsDisplayDTO>();
             for(News news : newsList){
                 NewsDisplayDTO temp = new NewsDisplayDTO();
+                temp.setData(news);
+                res.add(temp);
+            }
+
+            return res;
+        } catch(Exception ex) {
+            System.out.printf("Get news failed - Error: " + ex);
+            return Collections.emptyList();
+        }
+    }
+    public List<NewsTypeDropdownDTO> getNewsTypeList() {
+        try {
+            List<NewsType> newsList = newsTypeRepository.findNoneDeleteNewsType();
+            List<NewsTypeDropdownDTO> res = new ArrayList<>();
+            for(NewsType news : newsList){
+                NewsTypeDropdownDTO temp = new NewsTypeDropdownDTO();
                 temp.setData(news);
                 res.add(temp);
             }

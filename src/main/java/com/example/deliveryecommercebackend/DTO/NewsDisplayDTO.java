@@ -22,14 +22,13 @@ public class NewsDisplayDTO {
     private String user_name;
     @LastModifiedDate
     private Date updated;
-    private String action_code;
 
     public NewsDisplayDTO(News news) {
         this.id = news.getId();
         this.title = news.getTitle();
         this.sub_content = news.getSub_content();
         this.updated = news.getUpdated();
-        this.action_code = news.getAction().getCode();
+        this.user_name = news.getUser().getFullName();
 
         this.news_type_name = news.getNewsType().getName();
     }
@@ -39,7 +38,7 @@ public class NewsDisplayDTO {
         this.setTitle(news.getTitle());
         this.setSub_content(news.getSub_content());
         this.setUpdated(news.getUpdated());
-        this.setAction_code(news.getAction().getCode());
+        this.setUser_name(news.getUser().getFullName());
 
         this.setNews_type_name(news.getNewsType().getName());
     }
